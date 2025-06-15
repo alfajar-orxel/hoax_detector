@@ -1,5 +1,7 @@
 streamlit
+google-generativeai
+python-dotenv
 requests
 newspaper3k
-python-dotenv
-google-generativeai
+beautifulsoup4
+lxml[html_clean]
