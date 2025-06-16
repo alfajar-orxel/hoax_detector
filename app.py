@@ -2,7 +2,6 @@ import streamlit as st
 from prompts import prompt
 from gemini_interface import tanya_gemini
 from utils import ekstrak_teks
-from search_references import cari_Ref_Berita  
 
 st.set_page_config(page_title="Detektor Berita", layout="centered")
 st.title("Detektor Berita Hoax")
@@ -18,8 +17,8 @@ else:
         teks_input = ekstrak_teks(url)
         st.text_area("Isi berita (hasil ekstrak):", teks_input, height=400)
 
-if st.button("Deteksi Hoax") and teks_input:
-    with st.spinner("AI sedang berfikir..."):
+if st.button("Deteksi") and teks_input:
+    with st.spinner("Mohon tunggu ya, AI sedang menganalisis beritanya ^_^"):
         prompt_ = prompt(teks_input)
         hasil = tanya_gemini(prompt_)
 
@@ -41,12 +40,7 @@ if st.button("Deteksi Hoax") and teks_input:
             elif "confidence" in line.lower():
                 confidence = line.split(":", 1)[1].strip()
 
-        st.markdown(f"Kategori: `{kategori}`")
-        st.markdown(f"Penjelasan: {penjelasan}")
-        st.markdown(f"Kalimat Bermasalah: _{kalimat_dasar}_")
-        st.markdown(f"Tingkat Keyakinan AI: {confidence}")
-
-    try:
-        _ = cari_Ref_Berita(teks_input)
-    except Exception as e:
-        print("Gagal mencari referensi berita:", e)
+        st.markdown(f"**Kategori**: `{kategori}`")
+        st.markdown(f"**Penjelasan**: {penjelasan}")
+        st.markdown(f"**Kalimat Bermasalah**: _{kalimat_dasar}_")
+        st.markdown(f"**Tingkat Keyakinan AI**: {confidence}")
