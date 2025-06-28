@@ -3,10 +3,8 @@ from prompts import prompt
 from gemini_interface import tanya_gemini
 from utils import ekstrak_teks
 
-# Konfigurasi halaman
 st.set_page_config(page_title="Detektor Berita Hoax", layout="centered")
 
-# ===== CSS Custom =====
 st.markdown("""
     <style>
         body {
@@ -56,7 +54,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ===== UI =====
 st.title("Detektor Berita Hoax")
 
 input_type = st.radio("Pilih jenis input:", ["Teks", "Link Berita"])
@@ -88,7 +85,6 @@ if st.button("Deteksi") and teks_input:
             elif "confidence" in line.lower():
                 confidence = line.split(":", 1)[1].strip()
 
-        # Output hasil dalam box bergaya
         st.markdown("<div class='result-box'>", unsafe_allow_html=True)
         st.markdown(f"**Kategori**: `{kategori}`")
         st.markdown(f"**Penjelasan**: {penjelasan}")

@@ -14,12 +14,9 @@ from telegram.ext import (
 from prompts import prompt
 from gemini_interface import tanya_gemini
 from utils import ekstrak_teks
-from search_references import cari_Ref_Berita
 
 load_dotenv()
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-
-# ==================== Helper ====================
 
 def is_url(teks: str) -> bool:
     return teks.startswith("http://") or teks.startswith("https://")
@@ -36,7 +33,7 @@ def parse_gemini_response(hasil: str):
             penjelasan = line.split(":", 1)[1].strip()
         elif "confidence" in line.lower():
             confidence = line.split(":", 1)[1].strip()
-    return kategori, penjelasan, confidence
+    return kategori, penjelasan, confidence 
 
 def emoji_kategori(kategori):
     k = kategori.lower()
@@ -57,11 +54,10 @@ def build_main_menu():
     ]]
     return InlineKeyboardMarkup(keyboard)
 
-# ==================== Handlers ====================
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     welcome = (
-        "👋 *Selamat datang di Detektor Berita Hoax!*\n\n"
+        "🤖 *Detektor Hoax*\n\n"
         "Saya adalah asisten cerdas yang siap membantumu mendeteksi apakah sebuah berita tergolong:\n"
         "🔴 *Hoax* | 🟠 *Misleading* | 🟡 *Clickbait* | 🟢 *Valid*\n\n"
         "Silakan pilih jenis input yang ingin kamu kirim:"
@@ -137,7 +133,6 @@ async def kembali_ke_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.message.reply_text("Silakan pilih jenis berita yang ingin kamu analisis:", reply_markup=build_main_menu())
     context.user_data["mode"] = None
 
-# ==================== Main App ====================
 
 if __name__ == "__main__":
     app = ApplicationBuilder().token(BOT_TOKEN).build()
