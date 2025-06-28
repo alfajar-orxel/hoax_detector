@@ -35,7 +35,6 @@ Web ini dibuat sebagai bagian dari projek dengan tujuan:
 | Bahasa         | Python 3.13                         |
 | Framework UI   | Streamlit                           |
 | AI Engine      | Gemini 2.5 API (Generative AI by Google) |
-| NLP            | Prompt Engineering                  |
 | Web Scraping   | Newspaper3k + BeautifulSoup         |
 | Deployment     | Streamlit Cloud                     |
 
